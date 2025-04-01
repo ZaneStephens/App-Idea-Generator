@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Idea Generator</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.2.0/github-markdown.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>App Idea Generator</h1>
+            <p>Create and save comprehensive build guides for your application ideas</p>
+        </header>
+
+        <div class="main-content">
+            <div class="form-container">
+                <h2>Generate New Idea</h2>
+                <form id="idea-form">
+                    <div class="form-group">
+                        <label for="app-name">Application Name</label>
+                        <input type="text" id="app-name" placeholder="Enter a name for your application" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="app-description">Application Description</label>
+                        <textarea id="app-description" placeholder="Describe your application idea in detail" required></textarea>
+                    </div>
+
+                    <div class="form-group surprise-me-container">
+                        <button type="button" id="surprise-me-btn" class="gemini-btn surprise-btn">
+                            <span class="gemini-icon"></span>
+                            Surprise Me
+                        </button>
+                        <p class="helper-text">Fill the form automatically based on your title and description</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ai-model">AI Model</label>
+                        <select id="ai-model" required>
+                            <option value="gemini-2.5-pro-exp-03-25">Gemini 2.5 Pro (More creative, detailed, Longer responses)</option>
+                            <option value="gemini-2.0-flash-thinking-exp-01-21">Gemini 2.0 Flash Thinking (Cheper, Lower Max Output tokens - 8,192)</option>
+                        </select>
+                        <p class="helper-text">Select the AI model that will generate your build guide</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="app-architecture">Application Architecture</label>
+                        <select id="app-architecture" required>
+                            <option value="">Select the application architecture</option>
+                            <option value="frontend">Front-end Only - UI with minimal backend</option>
+                            <option value="fullstack">Full Stack - Complete frontend and backend</option>
+                            <option value="backend">Backend/API - Server-side processing</option>
+                            <option value="mobile">Mobile - Native or hybrid mobile apps</option>
+                            <option value="desktop">Desktop - Applications for Windows/Mac/Linux</option>
+                        </select>
+                        <p class="helper-text">This determines which technologies are applicable</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="primary-language">Primary Language</label>
+                        <select id="primary-language" required>
+                            <option value="">Select a programming language</option>
+                            <option value="javascript">JavaScript - Frontend web development, browser-based applications</option>
+                            <option value="typescript">TypeScript - Typed JavaScript for large-scale applications</option>
+                            <option value="python">Python - Data science, AI, backend, scripting</option>
+                            <option value="java">Java - Enterprise applications, Android development</option>
+                            <option value="csharp">C# - Windows applications, game development with Unity</option>
+                            <option value="go">Go - High-performance backend services, cloud applications</option>
+                            <option value="rust">Rust - Systems programming, performance-critical applications</option>
+                            <option value="swift">Swift - iOS and macOS application development</option>
+                            <option value="kotlin">Kotlin - Modern Android development, server-side applications</option>
+                            <option value="php">PHP - Web development, content management systems</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="app-type">Application Type</label>
+                        <select id="app-type" required>
+                            <option value="">Select the type of application</option>
+                            <option value="web">Web Application - Runs in a browser</option>
+                            <option value="mobile">Mobile App - For phones and tablets</option>
+                            <option value="desktop">Desktop Application - For Windows/Mac/Linux</option>
+                            <option value="api">API/Backend Service - Data processing services</option>
+                            <option value="game">Game - Interactive entertainment</option>
+                            <option value="ai">AI/ML Application - Using artificial intelligence</option>
+                            <option value="iot">IoT - Internet of Things device software</option>
+                        </select>
+                        <p class="helper-text">Select what kind of application you want to build</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="app-complexity">Application Complexity</label>
+                        <select id="app-complexity">
+                            <option value="basic">Basic - Simple app with minimal features</option>
+                            <option value="moderate">Moderate - Standard application with common functionality</option>
+                            <option value="advanced">Advanced - Complex application with advanced features</option>
+                            <option value="enterprise">Enterprise - Large-scale system with multiple integrations</option>
+                            <option value="">Let AI Decide - Based on other parameters</option>
+                        </select>
+                        <p class="helper-text">This helps determine the scope and feature set</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience-level">Your Coding Experience</label>
+                        <select id="experience-level">
+                            <option value="beginner">Beginner - I'm just starting to code</option>
+                            <option value="intermediate">Intermediate - I know the basics</option>
+                            <option value="advanced">Advanced - I'm comfortable coding</option>
+                            <option value="none">None - I don't code at all</option>
+                        </select>
+                        <p class="helper-text">This helps tailor the guide to your experience level</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="frameworks">Frameworks & Tools</label>
+                        <div class="multi-select-container" id="frameworks-container">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                        <div class="vibe-tools-container">
+                            <h4>Recommended Tools for Beginners</h4>
+                            <div class="vibe-tools">
+                                <div class="tool-card">
+                                    <input type="checkbox" id="vscode" name="vibe-tools" value="vscode" data-name="Visual Studio Code">
+                                    <label for="vscode">Visual Studio Code<span class="tool-description">Popular, beginner-friendly code editor</span></label>
+                                </div>
+                                <div class="tool-card">
+                                    <input type="checkbox" id="github" name="vibe-tools" value="github" data-name="GitHub">
+                                    <label for="github">GitHub<span class="tool-description">Store and share your code</span></label>
+                                </div>
+                                <div class="tool-card">
+                                    <input type="checkbox" id="figma" name="vibe-tools" value="figma" data-name="Figma">
+                                    <label for="figma">Figma<span class="tool-description">Design user interfaces</span></label>
+                                </div>
+                                <div class="tool-card">
+                                    <input type="checkbox" id="firebase" name="vibe-tools" value="firebase" data-name="Firebase">
+                                    <label for="firebase">Firebase<span class="tool-description">Easy database and hosting</span></label>
+                                </div>
+                                <div class="tool-card">
+                                    <input type="checkbox" id="netlify" name="vibe-tools" value="netlify" data-name="Netlify">
+                                    <label for="netlify">Netlify<span class="tool-description">Simple website hosting</span></label>
+                                </div>
+                                <div class="tool-card">
+                                    <input type="checkbox" id="chatgpt" name="vibe-tools" value="chatgpt" data-name="ChatGPT">
+                                    <label for="chatgpt">ChatGPT<span class="tool-description">AI assistance for coding</span></label>
+                                </div>
+                                <div class="tool-card">
+                                    <input type="checkbox" id="replit" name="vibe-tools" value="replit" data-name="Replit">
+                                    <label for="replit">Replit<span class="tool-description">Code in your browser</span></label>
+                                </div>
+                                <div class="tool-card">
+                                    <input type="checkbox" id="glitch" name="vibe-tools" value="glitch" data-name="Glitch">
+                                    <label for="glitch">Glitch<span class="tool-description">Build web apps without setup</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="features">Key Features</label>
+                        <div class="features-input-container">
+                            <textarea id="features" placeholder="List the key features of your application" required></textarea>
+                            <button type="button" id="suggest-features-btn" class="gemini-btn">
+                                <span class="gemini-icon"></span>
+                                Suggest Features
+                            </button>
+                        </div>
+                        
+                        <!-- Feature suggestions container -->
+                        <div id="feature-suggestions-container" class="feature-suggestions-container">
+                            <h4>Suggested Features</h4>
+                            <p class="helper-text">Select features you'd like to include in your application</p>
+                            
+                            <div class="tabs">
+                                <button type="button" class="tab-btn active" data-tab="core-features">Core Features</button>
+                                <button type="button" class="tab-btn" data-tab="deferred-features">Future Features</button>
+                            </div>
+                            
+                            <div class="tab-content active" id="core-features">
+                                <div id="core-features-list" class="feature-list">
+                                    <!-- Will be populated by JavaScript -->
+                                    <div class="empty-features">
+                                        <p>Click "Suggest Features" to get AI-powered feature ideas</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="tab-content" id="deferred-features">
+                                <div id="deferred-features-list" class="feature-list">
+                                    <!-- Will be populated by JavaScript -->
+                                    <div class="empty-features">
+                                        <p>Features marked for future implementation will appear here</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target-audience">Target Audience</label>
+                        <input type="text" id="target-audience" placeholder="Who is this application for?" required>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" id="generate-btn" class="primary-btn">Generate Build Guide</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="projects-container">
+                <h2>Your Projects</h2>
+                <div class="projects-list" id="projects-list">
+                    <!-- Projects will be loaded here -->
+                    <div class="empty-state">
+                        <p>No projects yet. Generate your first app idea!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="output-container" id="output-container">
+            <div class="output-header">
+                <h2 id="output-title">Build Guide</h2>
+                <div class="additional-file-btns">
+                    <button id="js-file-btn" class="file-gen-btn" title="Generate JavaScript Guide">
+                        <span class="gemini-icon"></span>
+                        <span class="file-icon">JS</span>
+                    </button>
+                    <button id="css-file-btn" class="file-gen-btn" title="Generate CSS Guide">
+                        <span class="gemini-icon"></span>
+                        <span class="file-icon">CSS</span>
+                    </button>
+                </div>
+                <div class="output-actions">
+                    <button id="delete-file-btn" class="icon-btn delete-btn" title="Delete current file" style="display: none;">
+                        <span class="material-icons">delete</span>
+                    </button>
+                    <button id="copy-btn" class="icon-btn" title="Copy to clipboard">
+                        <span class="material-icons">content_copy</span>
+                    </button>
+                    <button id="download-btn" class="icon-btn" title="Download as MD">
+                        <span class="material-icons">download</span>
+                    </button>
+                    <button id="close-output-btn" class="icon-btn" title="Close">
+                        <span class="material-icons">close</span>
+                    </button>
+                </div>
+            </div>
+            <div class="file-tabs" id="file-tabs">
+                <!-- Will be populated dynamically when files are available -->
+            </div>
+            <div class="output-content">
+                <div id="markdown-output" class="markdown-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Key Modal -->
+    <div id="api-key-modal" class="modal">
+        <div class="modal-content">
+            <h2>Enter Gemini API Key</h2>
+            <p>You need to provide a Google Gemini API key to generate build guides. This key will be stored in your browser's local storage only.</p>
+            <form id="api-key-form">
+                <div class="form-group">
+                    <label for="api-key-input">API Key</label>
+                    <input type="text" id="api-key-input" placeholder="Enter your Gemini API key" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="primary-btn">Save API Key</button>
+                </div>
+            </form>
+            <p class="info-text">Need a Gemini API key? <a href="https://ai.google.dev/" target="_blank">Get one here</a>.</p>
+        </div>
+    </div>
+
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loader"></div>
+        <p>Generating your app idea...</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.6/dist/purify.min.js"></script>
+    <script type="module" src="/src/js/app.js"></script>
+</body>
+</html>
