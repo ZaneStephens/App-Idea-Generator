@@ -405,6 +405,10 @@ textarea {
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
 }
 
+.delete-project-btn {
+  font-family: 'Material Icons';
+}
+
 .output-content {
   padding: 1.5rem;
   flex: 1;

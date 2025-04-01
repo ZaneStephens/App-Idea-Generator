@@ -41,8 +41,8 @@
                     <div class="form-group">
                         <label for="ai-model">AI Model</label>
                         <select id="ai-model" required>
-                            <option value="gemini-2.5-pro-exp-03-25">Gemini 2.5 Pro (More creative, detailed responses)</option>
-                            <option value="gemini-2.0-flash-thinking-exp-01-21">Gemini 2.0 Flash Thinking (Faster responses)</option>
+                            <option value="gemini-2.5-pro-exp-03-25">Gemini 2.5 Pro (More creative, detailed, Longer responses)</option>
+                            <option value="gemini-2.0-flash-thinking-exp-01-21">Gemini 2.0 Flash Thinking (Cheper, Lower Max Output tokens - 8,192)</option>
                         </select>
                         <p class="helper-text">Select the AI model that will generate your build guide</p>
                     </div>
@@ -202,25 +202,6 @@
                     <div class="form-group">
                         <label for="target-audience">Target Audience</label>
                         <input type="text" id="target-audience" placeholder="Who is this application for?" required>
-                    </div>
-
-                    <div class="form-group output-options">
-                        <label>Output Files</label>
-                        <div class="output-options-list">
-                            <div class="output-option">
-                                <input type="checkbox" id="build-guide-md" name="output-files" value="build-guide" checked data-name="Build Guide.md">
-                                <label for="build-guide-md">Build Guide.md</label>
-                            </div>
-                            <div class="output-option">
-                                <input type="checkbox" id="js-md" name="output-files" value="js" data-name="JS.md">
-                                <label for="js-md">JS.md</label>
-                            </div>
-                            <div class="output-option">
-                                <input type="checkbox" id="css-md" name="output-files" value="css" data-name="CSS.md">
-                                <label for="css-md">CSS.md</label>
-                            </div>
-                        </div>
-                        <p class="helper-text">Select which documentation files to generate</p>
                     </div>
 
                     <div class="form-group">
